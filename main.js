@@ -7,6 +7,7 @@ class Block {
     this.data = data;
     this.previousHash = previousHash;
     this.hash = "";
+    this.nonce = 0;
   }
 
   calculateHash() {
@@ -14,14 +15,27 @@ class Block {
       this.index +
         this.previousHash +
         this.timestamp +
-        JSON.stringify(this.data)
+        JSON.stringify(this.data) +
+        this.nonce
     ).toString();
+  }
+
+  mineBlock(difficulty) {
+    while (
+      this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")
+    ) {
+      this.nonce++;
+      this.hash = this.calculateHash();
+    }
+
+    console.log("Wykopano blok: " + this.hash);
   }
 }
 
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
+    this.difficulty = 4;
   }
 
   createGenesisBlock() {
@@ -34,7 +48,7 @@ class Blockchain {
 
   addBlock(newBlock) {
     newBlock.previousHash = this.getLatestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
+    newBlock.mineBlock(this.difficulty);
     this.chain.push(newBlock);
   }
 
@@ -56,9 +70,5 @@ class Blockchain {
 }
 
 const myBlockchain = new Blockchain();
-myBlockchain.addBlock(new Block(1, "05/12/2021", { amount: 100 }));
-myBlockchain.addBlock(new Block(2, "06/12/2021", { amount: 200 }));
-
-console.log(JSON.stringify(myBlockchain, null, 4));
 
 // Tutaj umieść kod z instrukcji

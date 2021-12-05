@@ -1,43 +1,32 @@
-# zadanie-1
+# zadanie-2
 
-Na początek zainstaluj potrzebne pakiety:
-`npm install`
+W kodzie z poprzedniego ćwiczenia możemy dodawać bloki w szybki sposób. Wystarczy utworzyć blok, obliczyć jego hash i dodać do łańcucha. Nowoczesne komputery potrafią takie rzeczy robić bardzo szybko, a przecież nie chcemy aby ludzie tworzyli tysiące bloków na sekundę i mieli możliwość zaśmiecania blockchaina. Dodatkowo pojawia się problem bezpieczeństwa, bo ktoś może zmodyfikować sobie blok, a następnie wygenerować poprawne hashe bloków za zmodyfikowanym, tworząc poprawny łańcuch.
 
-Aby odpalić skrypt użyj polecenia:
-`npm start`
+I tutaj pojawia się koncepcja Proof-of-Work (PoW). Polega to na wykorzystaniu dużej mocy obliczeniowej do utworzenia bloku. Ten proces również nazywa się kopaniem. Bitcoin np. wymaga, aby hash zaczynał się od specyficznej ilości zer. Ponieważ nie można wpłynąć na wynik funkcji haszującej, dlatego trzeba spróbować dużą liczbę kombinacji, aby odnaleźć odpowiedni hasz.
 
-Powinieneś zobaczyć w konsoli 3 bloki w blockchainie.
+Twórca Bitcoina założył również, że komputery z czasem będą coraz szybsze, dlatego co średnio 4 lata trudność znalezienia odpowiedniego hashu jest utrudniana (jest to tzw 'halving').
 
-Przyjrzyj się klasom i metodom dostępnym w pliku main.js
+W tym zadaniu skupimy się na mechanizmie Proof-of-Work. Chcemy, aby hash na początku posiadał specyficzną ilość zer, ale patrząc na informacje zawarte w bloku, wynik funkcji hashującej będzie zawsze taki sam. Potrzebna jest jakaś wartość, która będzie się zmieniać co zapewni różne hashe za każdym razem. Blockchain posiada coś takiego jak wartość `nonce`, która może być np. ustawiona na wartość losową.
 
-- W jakiej metodzie jest tworzony pierwszy blok łańcucha blockchain?
-- Jaka funkcja hashująca jest używana do reprezentacji bloku?
+Przyjrzyj się nowej metodzie `mineBlock` oraz zmianie w metodach `calculateHash` i `addBlock`.
 
-Teraz sprawdzimy poprawności łańcucha przy użyciu metody `isChainValid`.
-Metoda sprawdzająca poprawność łańcucha patrzy czy hash wyliczony z danych z bloku zgadza się z hashem podanym w bloku oraz czy poprzedni blok jest poprzednim blokiem.
+- jaką wartość przyjmuję `nonce` w naszym skrypcie po każdym wyliczeniu?
+- na ile ustawiona jest wartość `difficulty`?
 
-Zakomentuj linijkę wyświetlającą w konsoli cały łańcuch.
-Dodaj na dole pliku komendę wyświetlającą poprawność łańcucha:
+Na dole skryptu dodaj do blockchaina blok oraz zmierz czas obliczania jego hashu:
 
 ```js
-console.log(
-  `Czy blockchain jest poprawny? ${myBlockchain.isChainValid() ? "Tak" : "Nie"}`
-);
+console.time("Czas kopania");
+console.log("Kopanie bloku 1...");
+myBlockchain.addBlock(new Block(1, "05/12/2021", { amount: 100 }));
+console.timeEnd("Czas kopania");
 ```
 
-Następnie nadpisz wartość jednego z bloków:
-`myBlockchain.chain[1].data = { amount: 1000 };`
+Pod spodem tak samo dodaj następny blok podając inne wartości.
 
-i ponownie sprawdź poprawność łańcucha.
+W sprawozdaniu zamieść screenshot konsoli z czasami kopania obu bloków.
 
-Pokazuje to że nie można tak łatwo zmienić wartości bloku żeby np. stać się bogatym.
-
-Ok, ale ktoś może pomyśleć, że nadpiszę sobie wartość, jeszcze raz przelicze hash i powinno działać, sprawdźmy:
-`myBlockchain.chain[1].hash = myBlockchain.chain[1].calculateHash();`
-
-Jak widać wciąż poprawność jest zła. To dlatego, że relacja między blokami została zepsuta. Blockchain jest stworzony, aby dodawać do niego bloki, a nie zmieniać jego bloki czy je usuwać.
-
-W sprawozdaniu umieścić screenshot z konsoli po nadpisaniu wartości bloku, ponownym wyliczeniu hasha i ponownym sprawdzeniu poprawności łańcucha.
+Następnie zmień wartość `difficulty` w klasie `Blockchain` na 6. Uruchom skrypt i poczekaj aż bloki zostaną wydobyte. W sprawozadniu umieść również screenshot z konsoli po zmianie `difficulty` i wydobyciu obu bloków.
 
 Aby przejść do następnego zadania zmień gałąź komendą:
-`git checkout zadanie-2`
+`git checkout zadanie-3`
