@@ -1,0 +1,28 @@
+{
+  "name": "blockchain-lab",
+  "version": "1.0.0",
+  "description": "Ćwiczenia z Technologi Sieciowych - Blockchain i Kryptowaluty",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michsko544/blockchain-lab.git"
+  },
+  "keywords": [
+    "blockchain",
+    "crypto",
+    "bitcoin"
+  ],
+  "author": "Karolina Bałazy, Michał Skorus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michsko544/blockchain-lab/issues"
+  },
+  "homepage": "https://github.com/michsko544/blockchain-lab#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
