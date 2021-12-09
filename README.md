@@ -4,7 +4,7 @@ W kodzie z poprzedniego ćwiczenia możemy dodawać bloki w szybki sposób. Wyst
 
 I tutaj pojawia się koncepcja Proof-of-Work (PoW). Polega to na wykorzystaniu dużej mocy obliczeniowej do utworzenia bloku. Ten proces również nazywa się kopaniem. Bitcoin np. wymaga, aby hasz zaczynał się od specyficznej ilości zer. Ponieważ nie można wpłynąć na wynik funkcji haszującej, dlatego trzeba spróbować dużą liczbę kombinacji, aby odnaleźć odpowiedni hasz.
 
-**Ciekawostka** Twórca Bitcoina założył również, że komputery z czasem będą coraz szybsze, dlatego co średnio 4 lata trudność znalezienia odpowiedniego haszu jest utrudniana (jest to tzw 'halving').
+**Ciekawostka** Twórca Bitcoina założył również, że komputery z czasem będą coraz szybsze, dlatego co średnio 4 lata nagroda za wykopanie bloku jest zmniejszana o połowe (jest to tzw 'halving').
 
 W tym zadaniu skupimy się na mechanizmie Proof-of-Work. Chcemy, aby hasz na początku posiadał specyficzną ilość zer, ale patrząc na informacje zawarte w bloku, wynik funkcji haszującej będzie zawsze taki sam. Potrzebna jest jakaś wartość, która będzie się zmieniać co zapewni różne hasze za każdym razem. Blockchain posiada coś takiego jak wartość `nonce`, która może być np. ustawiona na wartość losową.
 
